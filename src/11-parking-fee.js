@@ -34,4 +34,54 @@
  */
 export function calculateParkingFee(hours, vehicleType) {
   // Your code here
+  if (hours <= 0 || Number.isNaN(hours)) {
+    return -1;
+  }
+  if (
+    typeof vehicleType !== "string" ||
+    (vehicleType !== "car" &&
+      vehicleType !== "motorcycle" &&
+      vehicleType !== "bus")
+  ) {
+    return -1;
+  }
+
+  let parkingFeeForCar = 0;
+  let parkingFeeForMotorcycle = 0;
+  let parkingFeeForBus = 0;
+
+  hours = Math.ceil(hours)
+
+  if (vehicleType === "car") {
+    parkingFeeForCar += 5;
+    hours = hours - 1;
+    if (hours > 0) {
+      for (let i = 0; i < hours; i++) {
+        parkingFeeForCar += 3;
+      }
+    }
+     return Math.min(parkingFeeForCar,30)
+  }
+  
+  if (vehicleType === "motorcycle") {
+    parkingFeeForMotorcycle += 3;
+    hours = hours - 1;
+    if (hours > 0) {
+      for (let i = 0; i < hours; i++) {
+        parkingFeeForMotorcycle += 2;
+      }
+    }
+     return Math.min(parkingFeeForMotorcycle,18)
+  }
+  if (vehicleType === "bus") {
+    parkingFeeForBus += 10;
+    hours = hours - 1;
+    if (hours > 0) {
+      for (let i = 0; i < hours; i++) {
+        parkingFeeForBus += 7;
+      }
+    }
+    return Math.min(parkingFeeForBus,60)
+  }
+
 }
